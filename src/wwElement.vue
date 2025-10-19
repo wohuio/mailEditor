@@ -806,9 +806,46 @@ export default {
       if (!wwLib.wwVariable.useComponentVariable) return;
 
       try {
+        // Register HTML content variable
         wwLib.wwVariable.useComponentVariable({
           uid: this.uid,
           name: 'html',
+          type: 'string',
+          defaultValue: ''
+        });
+
+        // Register email header variables
+        wwLib.wwVariable.useComponentVariable({
+          uid: this.uid,
+          name: 'from',
+          type: 'string',
+          defaultValue: ''
+        });
+
+        wwLib.wwVariable.useComponentVariable({
+          uid: this.uid,
+          name: 'to',
+          type: 'string',
+          defaultValue: ''
+        });
+
+        wwLib.wwVariable.useComponentVariable({
+          uid: this.uid,
+          name: 'cc',
+          type: 'string',
+          defaultValue: ''
+        });
+
+        wwLib.wwVariable.useComponentVariable({
+          uid: this.uid,
+          name: 'bcc',
+          type: 'string',
+          defaultValue: ''
+        });
+
+        wwLib.wwVariable.useComponentVariable({
+          uid: this.uid,
+          name: 'subject',
           type: 'string',
           defaultValue: ''
         });
@@ -1022,9 +1059,20 @@ export default {
     },
 
     updateEmailHeaders: function() {
-      // This will be called when any header field changes
-      // The values are already bound via v-model
-      // You can emit an event here if needed
+      // Update component variables
+      if (typeof wwLib !== 'undefined' && wwLib.wwVariable && wwLib.wwVariable.updateComponentVariable) {
+        try {
+          wwLib.wwVariable.updateComponentVariable(this.uid, 'from', this.fromField);
+          wwLib.wwVariable.updateComponentVariable(this.uid, 'to', this.toField);
+          wwLib.wwVariable.updateComponentVariable(this.uid, 'cc', this.ccField);
+          wwLib.wwVariable.updateComponentVariable(this.uid, 'bcc', this.bccField);
+          wwLib.wwVariable.updateComponentVariable(this.uid, 'subject', this.subjectField);
+        } catch (err) {
+          console.warn('Could not update email header variables:', err);
+        }
+      }
+
+      // Emit event
       this.$emit('trigger-event', {
         name: 'headers-changed',
         event: {
