@@ -1,5 +1,59 @@
 <template>
   <div class="email-editor-wrapper">
+    <!-- Email Header Fields -->
+    <div class="email-header">
+      <div class="header-field">
+        <label>Von:</label>
+        <input
+          type="email"
+          v-model="fromField"
+          @input="updateEmailHeaders"
+          placeholder="absender@example.com"
+          class="header-input"
+        />
+      </div>
+      <div class="header-field">
+        <label>An:</label>
+        <input
+          type="email"
+          v-model="toField"
+          @input="updateEmailHeaders"
+          placeholder="empfänger@example.com"
+          class="header-input"
+        />
+      </div>
+      <div class="header-field">
+        <label>CC:</label>
+        <input
+          type="email"
+          v-model="ccField"
+          @input="updateEmailHeaders"
+          placeholder="cc@example.com (optional)"
+          class="header-input"
+        />
+      </div>
+      <div class="header-field">
+        <label>BCC:</label>
+        <input
+          type="email"
+          v-model="bccField"
+          @input="updateEmailHeaders"
+          placeholder="bcc@example.com (optional)"
+          class="header-input"
+        />
+      </div>
+      <div class="header-field">
+        <label>Betreff:</label>
+        <input
+          type="text"
+          v-model="subjectField"
+          @input="updateEmailHeaders"
+          placeholder="Ihr Beleg zur Bestellung..."
+          class="header-input"
+        />
+      </div>
+    </div>
+
     <!-- Toolbar -->
     <div class="editor-toolbar">
       <!-- Text formatting -->
@@ -262,7 +316,12 @@ export default {
       updateTimer: null,
       editorDoc: null,
       editorWindow: null,
-      toolbarUpdateTimer: null
+      toolbarUpdateTimer: null,
+      fromField: '',
+      toField: '',
+      ccField: '',
+      bccField: '',
+      subjectField: ''
     };
   },
   computed: {
@@ -960,6 +1019,22 @@ export default {
       }
 
       return 12;
+    },
+
+    updateEmailHeaders: function() {
+      // This will be called when any header field changes
+      // The values are already bound via v-model
+      // You can emit an event here if needed
+      this.$emit('trigger-event', {
+        name: 'headers-changed',
+        event: {
+          from: this.fromField,
+          to: this.toField,
+          cc: this.ccField,
+          bcc: this.bccField,
+          subject: this.subjectField
+        }
+      });
     }
   }
 };
@@ -975,6 +1050,56 @@ export default {
   overflow: hidden;
   border: 1px solid #e0e0e0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.email-header {
+  padding: 20px;
+  background: #f9fafb;
+  border-bottom: 1px solid #ececec;
+
+  .header-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      min-width: 70px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-right: 12px;
+    }
+
+    .header-input {
+      flex: 1;
+      padding: 10px 14px;
+      background: #ffffff;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #1f2937;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover {
+        border-color: #9ca3af;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      &::placeholder {
+        color: #9ca3af;
+      }
+    }
+  }
 }
 
 .editor-toolbar {
@@ -1116,7 +1241,8 @@ export default {
 
 .editor-iframe {
   width: 100%;
-  min-height: 300px;
+  min-height: 500px;
+  height: 600px;
   border: none;
   display: block;
 
