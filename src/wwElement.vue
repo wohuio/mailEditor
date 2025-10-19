@@ -223,6 +223,7 @@
       ref="editorFrame"
       class="editor-iframe"
       :class="{ 'editor-editing': isEditing }"
+      :style="{ height: editorHeightPx }"
     ></iframe>
 
     <!-- HTML Preview (Editor Only) -->
@@ -372,6 +373,10 @@ export default {
         this.$emit('update:content', Object.assign({}, this.content, { subjectField: value }));
         this.updateEmailHeaderVariables();
       }
+    },
+    editorHeightPx: function() {
+      var height = this.content && this.content.editorHeight !== undefined ? this.content.editorHeight : 600;
+      return height + 'px';
     },
     showSigDropdown: function() {
       return this.signatures.length > 0;
@@ -1325,7 +1330,6 @@ export default {
 .editor-iframe {
   width: 100%;
   min-height: 500px;
-  height: auto;
   border: none;
   display: block;
 

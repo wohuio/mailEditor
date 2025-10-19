@@ -144,6 +144,27 @@ export default {
       propertyHelp: "Betreff der E-Mail",
       /* wwEditor:end */
     },
+
+    // Editor Height
+    editorHeight: {
+      label: {
+        en: "Editor Höhe (px)",
+      },
+      type: "Number",
+      section: "settings",
+      bindable: true,
+      defaultValue: 600,
+      min: 200,
+      max: 2000,
+      step: 50,
+      /* wwEditor:start */
+      bindingValidation: {
+        type: "number",
+        tooltip: "Height of the editor in pixels",
+      },
+      propertyHelp: "Höhe des Editors in Pixeln",
+      /* wwEditor:end */
+    },
   },
   triggerEvents: [
     {
