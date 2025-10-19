@@ -1129,10 +1129,10 @@ export default {
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
+  border-radius: 0;
+  overflow: visible;
   border: 1px solid #e0e0e0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: none;
 }
 
 .email-header {
@@ -1162,7 +1162,7 @@ export default {
       padding: 10px 14px;
       background: #ffffff;
       border: 1px solid #d1d5db;
-      border-radius: 8px;
+      border-radius: 0;
       font-size: 14px;
       color: #1f2937;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -1175,7 +1175,7 @@ export default {
       &:focus {
         outline: none;
         border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        box-shadow: none;
       }
 
       &::placeholder {
@@ -1199,7 +1199,7 @@ export default {
     padding: 8px;
     background: transparent;
     border: none;
-    border-radius: 8px;
+    border-radius: 0;
     cursor: pointer;
     font-size: 16px;
     min-width: 36px;
@@ -1236,7 +1236,7 @@ export default {
         .line {
           height: 2px;
           background: currentColor;
-          border-radius: 1px;
+          border-radius: 0;
           display: block;
         }
       }
@@ -1265,7 +1265,7 @@ export default {
     padding: 8px 12px;
     background: #f9fafb;
     border: 1px solid #e5e7eb;
-    border-radius: 8px;
+    border-radius: 0;
     cursor: pointer;
     font-size: 13px;
     min-width: 115px;
@@ -1278,13 +1278,13 @@ export default {
     &:hover {
       background: #ffffff;
       border-color: #d1d5db;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      box-shadow: none;
     }
 
     &:focus {
       outline: none;
       border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      box-shadow: none;
       background: #ffffff;
     }
   }
@@ -1295,20 +1295,20 @@ export default {
     padding: 4px;
     background: #f9fafb;
     border: 1px solid #e5e7eb;
-    border-radius: 8px;
+    border-radius: 0;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {
       border-color: #d1d5db;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      box-shadow: none;
       transform: translateY(-1px);
     }
 
     &:focus {
       outline: none;
       border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      box-shadow: none;
     }
 
     &::-webkit-color-swatch-wrapper {
@@ -1317,7 +1317,7 @@ export default {
 
     &::-webkit-color-swatch {
       border: none;
-      border-radius: 5px;
+      border-radius: 0;
     }
   }
 }
@@ -1325,7 +1325,7 @@ export default {
 .editor-iframe {
   width: 100%;
   min-height: 500px;
-  height: 600px;
+  height: auto;
   border: none;
   display: block;
 
@@ -1350,7 +1350,7 @@ export default {
       color: #333;
       padding: 8px;
       background: #ffffff;
-      border-radius: 4px;
+      border-radius: 0;
       margin-bottom: 8px;
 
       &:hover {
@@ -1363,7 +1363,7 @@ export default {
     background: #1e1e1e;
     color: #d4d4d4;
     padding: 16px;
-    border-radius: 4px;
+    border-radius: 0;
     overflow-x: auto;
     font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
     font-size: 12px;
