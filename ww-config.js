@@ -58,6 +58,92 @@ export default {
       propertyHelp: "JSON Array mit Signaturen. Jedes Objekt: {name: 'Name', html: '<p>HTML</p>'}",
       /* wwEditor:end */
     },
+
+    // Email Header Fields
+    fromField: {
+      label: {
+        en: "Von (Absender)",
+      },
+      type: "Text",
+      section: "settings",
+      bindable: true,
+      defaultValue: "",
+      /* wwEditor:start */
+      bindingValidation: {
+        type: "string",
+        tooltip: "Sender email address",
+      },
+      propertyHelp: "E-Mail-Adresse des Absenders",
+      /* wwEditor:end */
+    },
+
+    toField: {
+      label: {
+        en: "An (Empfänger)",
+      },
+      type: "Text",
+      section: "settings",
+      bindable: true,
+      defaultValue: "",
+      /* wwEditor:start */
+      bindingValidation: {
+        type: "string",
+        tooltip: "Recipient email address",
+      },
+      propertyHelp: "E-Mail-Adresse des Empfängers",
+      /* wwEditor:end */
+    },
+
+    ccField: {
+      label: {
+        en: "CC",
+      },
+      type: "Text",
+      section: "settings",
+      bindable: true,
+      defaultValue: "",
+      /* wwEditor:start */
+      bindingValidation: {
+        type: "string",
+        tooltip: "CC email address (optional)",
+      },
+      propertyHelp: "CC E-Mail-Adresse (optional)",
+      /* wwEditor:end */
+    },
+
+    bccField: {
+      label: {
+        en: "BCC",
+      },
+      type: "Text",
+      section: "settings",
+      bindable: true,
+      defaultValue: "",
+      /* wwEditor:start */
+      bindingValidation: {
+        type: "string",
+        tooltip: "BCC email address (optional)",
+      },
+      propertyHelp: "BCC E-Mail-Adresse (optional)",
+      /* wwEditor:end */
+    },
+
+    subjectField: {
+      label: {
+        en: "Betreff",
+      },
+      type: "Text",
+      section: "settings",
+      bindable: true,
+      defaultValue: "",
+      /* wwEditor:start */
+      bindingValidation: {
+        type: "string",
+        tooltip: "Email subject",
+      },
+      propertyHelp: "Betreff der E-Mail",
+      /* wwEditor:end */
+    },
   },
   triggerEvents: [
     {

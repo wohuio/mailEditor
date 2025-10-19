@@ -7,7 +7,6 @@
         <input
           type="email"
           v-model="fromField"
-          @input="updateEmailHeaders"
           placeholder="absender@example.com"
           class="header-input"
         />
@@ -17,7 +16,6 @@
         <input
           type="email"
           v-model="toField"
-          @input="updateEmailHeaders"
           placeholder="empfänger@example.com"
           class="header-input"
         />
@@ -27,7 +25,6 @@
         <input
           type="email"
           v-model="ccField"
-          @input="updateEmailHeaders"
           placeholder="cc@example.com (optional)"
           class="header-input"
         />
@@ -37,7 +34,6 @@
         <input
           type="email"
           v-model="bccField"
-          @input="updateEmailHeaders"
           placeholder="bcc@example.com (optional)"
           class="header-input"
         />
@@ -47,7 +43,6 @@
         <input
           type="text"
           v-model="subjectField"
-          @input="updateEmailHeaders"
           placeholder="Ihr Beleg zur Bestellung..."
           class="header-input"
         />
@@ -316,12 +311,7 @@ export default {
       updateTimer: null,
       editorDoc: null,
       editorWindow: null,
-      toolbarUpdateTimer: null,
-      fromField: '',
-      toField: '',
-      ccField: '',
-      bccField: '',
-      subjectField: ''
+      toolbarUpdateTimer: null
     };
   },
   computed: {
@@ -337,6 +327,51 @@ export default {
     placeholderText: function() {
       if (!this.content) return 'Schreibe deine Email...';
       return this.content.placeholder || 'Schreibe deine Email...';
+    },
+    fromField: {
+      get: function() {
+        return this.content && this.content.fromField !== undefined ? this.content.fromField : '';
+      },
+      set: function(value) {
+        this.$emit('update:content', Object.assign({}, this.content, { fromField: value }));
+        this.updateEmailHeaderVariables();
+      }
+    },
+    toField: {
+      get: function() {
+        return this.content && this.content.toField !== undefined ? this.content.toField : '';
+      },
+      set: function(value) {
+        this.$emit('update:content', Object.assign({}, this.content, { toField: value }));
+        this.updateEmailHeaderVariables();
+      }
+    },
+    ccField: {
+      get: function() {
+        return this.content && this.content.ccField !== undefined ? this.content.ccField : '';
+      },
+      set: function(value) {
+        this.$emit('update:content', Object.assign({}, this.content, { ccField: value }));
+        this.updateEmailHeaderVariables();
+      }
+    },
+    bccField: {
+      get: function() {
+        return this.content && this.content.bccField !== undefined ? this.content.bccField : '';
+      },
+      set: function(value) {
+        this.$emit('update:content', Object.assign({}, this.content, { bccField: value }));
+        this.updateEmailHeaderVariables();
+      }
+    },
+    subjectField: {
+      get: function() {
+        return this.content && this.content.subjectField !== undefined ? this.content.subjectField : '';
+      },
+      set: function(value) {
+        this.$emit('update:content', Object.assign({}, this.content, { subjectField: value }));
+        this.updateEmailHeaderVariables();
+      }
     },
     showSigDropdown: function() {
       return this.signatures.length > 0;
@@ -1058,8 +1093,8 @@ export default {
       return 12;
     },
 
-    updateEmailHeaders: function() {
-      // Update component variables
+    updateEmailHeaderVariables: function() {
+      // Update component variables for output
       if (typeof wwLib !== 'undefined' && wwLib.wwVariable && wwLib.wwVariable.updateComponentVariable) {
         try {
           wwLib.wwVariable.updateComponentVariable(this.uid, 'from', this.fromField);
