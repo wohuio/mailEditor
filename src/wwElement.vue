@@ -1332,6 +1332,7 @@ export default {
   min-height: 500px;
   border: none;
   display: block;
+  overflow: auto;
 
   /* wwEditor:start */
   &.editor-editing {
